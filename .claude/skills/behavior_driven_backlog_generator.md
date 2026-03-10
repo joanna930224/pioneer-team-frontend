@@ -1,65 +1,98 @@
 # Skill: Behavior Driven Backlog Generator
 
 ## 목적
-Feature 설명을 입력하면 행동 기반 백로그와 UI 백로그를 생성한다.
+Feature 설명을 입력하면 사용자 행동 흐름과 UI 구성 요소를 기반으로  
+Behavior Backlog와 UI Backlog를 생성한다.
 
-각 백로그는 다음 구조를 따른다.
+각 Backlog는 반드시 아래 구조를 따른다.
 
-Title  
+Backlog Title  
 Success Criteria  
-Todo (최대 5개)
+Todo
 
 ---
 
-## 규칙
-1. 행동 단위 (Behavior / Flow)
-    - 사용자가 무엇을 경험하고 행동하는지 중심
-    - 한 항목은 하나의 행동만
-2. UI 단위 (Screen / Component)
-    - 화면/컴포넌트 단위
-    - 디자인 책임 중심
-3. 제한
-    - UX/디자인 관점 유지
-    - 기술/레이어 단위로 쪼개지 말 것
+## 중요 규칙 (Strict Rules)
+
+이 Skill은 **BDD 테스트 생성기가 아니다.**
+
+다음 형식은 절대 사용하지 않는다.
+
+- Given
+- When
+- Then
+- Scenario
+- Test Case
+
+모든 Backlog는 반드시 다음 구조를 따른다.
+
+Backlog Title  
+Success Criteria  
+Todo
+
+다른 형식은 생성하지 않는다.
 
 ---
 
 ## Backlog Title 규칙
 
-행동 백로그 제목 형식:
+### Behavior Backlog
+
+제목 형식은 반드시 아래를 따른다.
 
 사용자가 <행동> 하면 시스템이 <반응> 한다
 
-UI 백로그 제목 형식:
+예
+
+- 사용자가 로그인 버튼을 클릭하면 시스템이 OAuth 인증을 시작한다
+- 사용자가 로그인에 성공하면 시스템이 홈 화면으로 이동한다
+
+---
+
+### UI Backlog
+
+제목 형식은 반드시 아래를 따른다.
 
 <UI 요소>가 표시되면 시스템이 <디자인 또는 상태>를 적용한다
+
+예
+
+- 로그인 화면이 표시되면 시스템이 OAuth 버튼 디자인을 적용한다
+- 오류 메시지가 표시되면 시스템이 경고 스타일을 적용한다
 
 ---
 
 ## Backlog 종류
 
 ### 1 Behavior Backlog
+
 사용자 행동 흐름을 기준으로 분해한다.
 
-예
+행동 예
+
 - 페이지 진입
 - 기능 실행
-- 오류 처리
-- 성공 처리
+- 오류 확인
+- 성공 결과 확인
+- 상태 변경
 
-개수 제한 없음.  
-사용자 흐름을 완성하는 최소 단위로 생성한다.
+각 Behavior Backlog는 **하나의 사용자 행동만 포함한다.**
+
+개수 제한 없음.
 
 ---
 
 ### 2 UI Backlog
-화면 구성 요소 기준으로 분해한다.
+
+화면 또는 컴포넌트 기준으로 분해한다.
 
 예
+
 - 화면 레이아웃
 - 버튼
 - 메시지
 - 상태 표시
+- 네비게이션
 
 개수 제한 없음.
 
@@ -67,70 +100,107 @@ UI 백로그 제목 형식:
 
 ## Success Criteria 규칙
 
-각 Backlog는 3~4개의 Success Criteria를 가진다.
+각 Backlog는 **3~4개의 Success Criteria**를 가진다.
 
 조건
 
-- 테스트 가능해야 한다
-- 사용자 관점 검증이어야 한다
+- 사용자가 확인 가능한 결과여야 한다
 - 기능 완료 여부를 판단할 수 있어야 한다
+- 테스트 가능한 문장이어야 한다
+- 시스템 내부 구현이 아닌 사용자 관점으로 작성한다
+
+예
+
+Success Criteria
+
+- 사용자가 로그인 페이지에 접근할 수 있다
+- OAuth 로그인 버튼이 화면에 표시된다
+- 인증 성공 시 로그인 상태가 유지된다
 
 ---
 
 ## Todo 규칙
 
-Todo는 구현 작업이다.
+Todo는 **구현 작업 목록이다.**
 
 조건
 
 - 최대 5개
 - 개발 작업 중심
-- 구현 가능한 단위
+- 실제 구현 가능한 단위
+- 시스템 내부 구현 관점으로 작성 가능
+
+예
+
+Todo
+
+- 로그인 페이지 UI 구현
+- Google OAuth 연동
+- Kakao OAuth 연동
+- 인증 상태 관리 로직 구현
+- 로그인 성공 후 리다이렉트 처리
 
 ---
 
-## 출력 구조
+## 출력 구조 (Strict Format)
 
-행동 단위 Backlog
-
-Backlog Title  
-Success Criteria  
-Todo
-
-UI 단위 Backlog
-
-Backlog Title  
-Success Criteria  
-Todo
+반드시 아래 구조로 출력한다.
 
 ---
 
-## 입력 예시
+Behavior Backlog
+
+Backlog Title  
+Success Criteria
+- 항목
+- 항목
+- 항목
+
+Todo
+- 작업
+- 작업
+- 작업
+
+---
+
+UI Backlog
+
+Backlog Title  
+Success Criteria
+- 항목
+- 항목
+- 항목
+
+Todo
+- 작업
+- 작업
+- 작업
+
+---
+
+## 출력 규칙
+
+- 모든 Backlog는 Title / Success Criteria / Todo 구조를 가진다
+- Success Criteria는 3~4개 작성한다
+- Todo는 최대 5개 작성한다
+- Given / When / Then 형식은 사용하지 않는다
+
+만약 출력이 규칙을 따르지 않으면 다시 생성한다.
+
+---
+
+## 입력
 
 Feature  
-사용자 인증 기능 개발
+<Feature 설명>
 
 ---
 
 ## 출력 목표
 
-사용자 행동 흐름과 UI 구성 요소를 기반으로  
-Behavior Backlog와 UI Backlog를 생성한다.
+Feature 설명을 기반으로
 
+1. 사용자 행동 흐름 기반 Behavior Backlog 생성
+2. UI 구성 요소 기반 UI Backlog 생성
 
-
-## 출력 예시
-입력: 사용자 인증 기능 개발
-
-출력:
-행동 단위:
-- 사용자가 로그인 화면에 진입할 수 있다
-- 사용자가 OAuth를 선택해 로그인 시도한다
-- 사용자가 로그인 실패 시 오류를 확인할 수 있다
-- 사용자가 로그인 성공 시 홈 화면/Navbar에 반영된다
-
-UI 단위:
-- 로그인 화면 디자인 및 버튼 배치
-- OAuth 버튼 디자인(Google/Kakao)
-- 오류 메시지 디자인 및 표시 위치
-- Navbar 로그인 상태 표시 디자인
+각 Backlog는 반드시 Title / Success Criteria / Todo 구조를 따른다.
