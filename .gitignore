@@ -1,4 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/nextjs,react,intellij,intellij+iml,intellij+all
+ Created by https://www.toptal.com/developers/gitignore/api/nextjs,react,intellij,intellij+iml,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,react,intellij,intellij+iml,intellij+all
 
 ### Intellij ###
@@ -287,4 +287,5 @@ sketch
 .env
 .env.local
 
-
+# exclude .DS_Store
+.DS_Store
