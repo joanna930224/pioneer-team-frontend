@@ -1,24 +1,18 @@
-# Command: backlog
+# Command: /backlog
 
 ## 목적
-Feature 설명을 입력하면 **Behavior Driven Backlog Generator Skill**을 사용하여  
-Behavior Backlog와 UI Backlog를 생성한다.
 
-각 Backlog는 반드시 다음 구조를 따른다.
+사용자가 Backlog Title을 입력하면  
+Frontend Agile Backlog를 생성한다.
 
-Backlog Title  
-Success Criteria  
-Todo
+Backlog는 다음 두 가지 타입을 가진다.
 
----
+- Behavior Backlog
+- UI Backlog
 
-## 사용 방법
+이 Command는 다음 규칙을 사용한다.
 
-/backlog <Feature 설명>
-
-예시
-
-/backlog 사용자 인증 기능 개발
+.claude/skills/FRONTEND_BACKLOG_GENERATOR.md
 
 ---
 
@@ -37,60 +31,115 @@ Todo
 - Props 정의
 - API 설계
 
-이 명령은 **테스트 시나리오 생성 명령이 아니다.**
+이 Command는 **테스트 시나리오 생성 명령이 아니다.**
 
 반드시 **Backlog 형식으로만 출력한다.**
 
 ---
 
+## 사용 방법
+
+/backlog <Backlog Title>
+
+예시
+
+/backlog 인증되지 않은 사용자가 게시물 리스트를 조회한다
+
+또는
+
+/backlog 게시물 리스트 페이지가 게시물 목록을 표시한다
+
+---
+
+## 동작 규칙
+
+1. 사용자가 입력한 Backlog Title을 읽는다
+2. Actor를 분석하여 Backlog Type을 결정한다
+
+Actor가 다음일 경우
+
+User Actor 또는 System Actor  
+→ Behavior Backlog
+
+UI Actor  
+→ UI Backlog
+
+3. Skill 규칙을 적용하여 Backlog를 생성한다
+
+---
+
 ## 출력 형식
 
-모든 Backlog는 반드시 다음 구조를 따른다.
+Backlog Type  
+Behavior Backlog 또는 UI Backlog
 
 Backlog Title  
+<입력된 제목>
+
 Success Criteria
-- 항목
-- 항목
-- 항목
+
+- ...
+- ...
+- ...
+- ...
 
 Todo
-- 작업
-- 작업
-- 작업
 
-조건
+1. ...
+2. ...
+3. ...
+4. ...
+5. ...
 
-- Success Criteria는 3~4개 작성
-- Todo는 최대 5개 작성
-
----
-
-## 실행 규칙
-
-1. Behavior Driven Backlog Generator Skill을 사용한다
-2. Feature 설명을 기반으로 Backlog를 생성한다
-3. Behavior Backlog를 먼저 생성한다
-4. UI Backlog를 그 다음 생성한다
-5. 모든 Backlog는 Title / Success Criteria / Todo 구조를 따른다
+Todo는 **최대 5개까지만 작성한다.**
 
 ---
 
-## 입력
+## Title 검증 규칙
 
-Feature  
-{{args}}
+Title은 반드시 다음 구조여야 한다.
+
+Actor + 행동 + 대상
+
+Actor는 다음 중 하나여야 한다.
+
+### User Actor
+
+- 인증된 사용자
+- 인증되지 않은 사용자
+- 관리자
+- 시스템 관리자
+- 게스트 사용자
+
+### System Actor
+
+- 애플리케이션
+- 시스템
+- 백엔드 서버
+- API 서버
+
+### UI Actor
+
+- 로그인 페이지
+- 게시물 리스트 페이지
+- 회원가입 화면
+- 관리자 대시보드
 
 ---
 
-## 실행 지시
+## 규칙 위반 처리
 
-Use the **Behavior Driven Backlog Generator** skill.
+Title이 규칙을 만족하지 않으면  
+Backlog를 생성하지 않고 다음 가이드를 출력한다.
 
-Strictly follow the skill rules.
+Backlog Title이 규칙을 만족하지 않습니다.
 
-Generate:
+Backlog Title은 다음 형식을 따라야 합니다.
 
-1. Behavior Backlog
-2. UI Backlog
+Actor + 행동 + 대상
 
-If the output contains **Given / When / Then** or does not follow the required structure, regenerate the output.
+예
+
+인증된 사용자가 게시물을 생성한다  
+인증되지 않은 사용자가 게시물 리스트를 조회한다  
+게시물 리스트 페이지가 게시물 목록을 표시한다
